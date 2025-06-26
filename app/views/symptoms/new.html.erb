@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Adicionar Novo Sintoma</h1>
+  
+  <%= form_with(model: @symptom, local: true) do |form| %>
+    <% if @symptom.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(@symptom.errors.count, "erro") %> impedem este sintoma de ser salvo:</h4>
+        <ul>
+          <% @symptom.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, 'Nome do Sintoma', class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Salvar Sintoma', class: 'btn btn-primary' %>
+      <%= link_to 'Cancelar', symptoms_path, class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+</div>

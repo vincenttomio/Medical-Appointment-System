@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Minhas Consultas</h1>
+
+  <% if @appointments.any? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Data/Hora</th>
+          <th>Médico</th>
+          <th>Especialidade</th>
+          <th>Sintomas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @appointments.each do |appointment| %>
+          <tr>
+            <td><%= l(appointment.datetime, format: :long) %></td>
+            <td><%= appointment.doctor.user.name %></td>
+            <td><%= appointment.doctor.specialty %></td>
+            <td>
+              <% appointment.symptoms.each do |symptom| %>
+                <span class="badge bg-primary"><%= symptom.name %></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-info">
+      Você não possui consultas agendadas.
+    </div>
+  <% end %>
+</div>

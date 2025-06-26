@@ -1,0 +1,36 @@
+<%= form_with(model: [:medico, @appointment], local: true) do |form| %>
+  <% if @appointment.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@appointment.errors.count, "erro") %> impedem esta consulta de ser salva:</h4>
+      <ul>
+        <% @appointment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :patient_id, 'Paciente', class: 'form-label' %>
+    <%= form.collection_select :patient_id, Patient.includes(:user).all, :id, ->(p) { p.user.name }, { prompt: 'Selecione um paciente' }, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :datetime, 'Data e Hora', class: 'form-label' %>
+    <%= form.datetime_local_field :datetime, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :symptom_ids, 'Sintomas', class: 'form-label' %>
+    <%= form.collection_check_boxes :symptom_ids, Symptom.all, :id, :name do |b| %>
+      <div class="form-check">
+        <%= b.check_box class: 'form-check-input' %>
+        <%= b.label class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Salvar Consulta', class: 'btn btn-primary' %>
+  </div>
+<% end %>
