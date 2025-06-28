@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # Área do médico
   namespace :medico do
-    resources :appointments
+    resources :appointments, except: [:show] 
   end
   
   # Sintomas

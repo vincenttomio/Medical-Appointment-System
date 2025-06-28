@@ -29,7 +29,11 @@
             </td>
             <td>
               <%= link_to 'Editar', edit_medico_appointment_path(appointment), class: 'btn btn-sm btn-warning' %>
-              <%= link_to 'Cancelar', medico_appointment_path(appointment), 
+              <%# <%= link_to 'Cancelar', medico_appointment_path(appointment), 
+                          method: :delete, 
+                          data: { confirm: 'Tem certeza que deseja cancelar esta consulta?' }, 
+                          class: 'btn btn-sm btn-danger' %>
+              <%= button_to 'Cancelar', medico_appointment_path(appointment), 
                           method: :delete, 
                           data: { confirm: 'Tem certeza que deseja cancelar esta consulta?' }, 
                           class: 'btn btn-sm btn-danger' %>
